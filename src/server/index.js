@@ -1,9 +1,14 @@
-var express = require("express");
-var app = express();
+const express = require('express');
+const cors = require('cors');
+const api = require('./utils/api');
 
-app.get("/", (req, res, next) => {
-  res.json("test");
- });
+const app = express();
+app.use(cors());
+
+app.get("/curriculum/:cohortId", async (req, res, next) => {
+  const data = await api.getCurriculum(req.params.cohortId);
+  res.status(200).send(data)
+});
 
 
 app.listen(9001, () => {
