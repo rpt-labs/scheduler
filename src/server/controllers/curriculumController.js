@@ -1,4 +1,4 @@
-const getCurriculumByCohortId = require('../helpers/curriculum')
+const getCurriculumByCohortId = require('../helpers/curriculumHelper')
 
 exports.getCurriculumByCohortId = async (req, res) => {
   const { cohortName } = req.query;
