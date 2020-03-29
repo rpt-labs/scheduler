@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Grid, Segment, Header } from 'semantic-ui-react';
 import RadioButton from './RadioButton';
-import { PaddedGrid } from '../Styles/TeamStyles';
 
-const RadioButtonList = props => {
+export function RadioButtonList(props) {
   const { cohorts, handleRadioButtonChange, showDetails, buttonLabel } = props;
   const cohortsList = cohorts.map(cohort => (
     <Grid.Column key={cohort.name}>
@@ -19,9 +18,9 @@ const RadioButtonList = props => {
       <Header as="h2" style={{ textAlign: 'center', marginTop: '15px' }}>
         Select A Cohort
       </Header>
-      <PaddedGrid columns={3} relaxed style={{ marginLeft: '50px' }}>
+      <Grid columns={3} relaxed style={{ marginLeft: '50px' }}>
         {cohortsList}
-      </PaddedGrid>
+      </Grid>
       <Button
         disabled={!isSelected}
         primary
@@ -40,5 +39,3 @@ RadioButtonList.propTypes = {
   showDetails: PropTypes.func.isRequired,
   buttonLabel: PropTypes.string.isRequired
 };
-
-export default RadioButtonList;
