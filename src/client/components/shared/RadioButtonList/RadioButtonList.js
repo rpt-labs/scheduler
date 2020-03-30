@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Grid, Segment, Header } from 'semantic-ui-react';
 import RadioButton from './RadioButton';
+// import styles from './RadioButtonList.scss';
 
 export function RadioButtonList(props) {
   const { cohorts, handleRadioButtonChange, showDetails, buttonLabel } = props;
@@ -14,7 +15,7 @@ export function RadioButtonList(props) {
   const isSelected = cohorts.some(cohort => cohort.isChecked);
 
   return (
-    <Segment placeholder>
+    <Segment placeholder data-testid="radio-button-list">
       <Header as="h2" style={{ textAlign: 'center', marginTop: '15px' }}>
         Select A Cohort
       </Header>
