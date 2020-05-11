@@ -7,7 +7,7 @@ const RadioButton = props => {
   return (
     <div data-testid="radio-button">
       <Form.Field>
-        <Radio
+        <Radio data-testid="radio"
           label={cohort.name}
           name="cohortList"
           value={cohort.name}

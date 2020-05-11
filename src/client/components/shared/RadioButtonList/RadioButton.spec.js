@@ -17,10 +17,10 @@ describe('RadioButton', () => {
     expect(queryByTestId('radio-button')).not.toBeNull();
   });
 
-  // it('should handle button change when the button is clicked', () => {
-  //   const { getByTestId } = render(<RadioButton {...defaultProps} />);
-  //   const button = getByTestId('radio-button')
-  //   fireEvent.onClick(button)
-  //   expect(defaultProps.handleRadioButtonChange).toHaveBeenCalled();
-  // });
+  it('should handle button change when the button is clicked', () => {
+    const { getByTestId } = render(<RadioButton {...defaultProps} />);
+    const button = getByTestId('radio')
+    fireEvent.click(button.children[0])
+    expect(defaultProps.handleRadioButtonChange).toHaveBeenCalled();
+  });
 });
