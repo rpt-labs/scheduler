@@ -6,16 +6,21 @@ import { Header, List} from 'semantic-ui-react';
 const SummaryContent = props => {
   const { curriculum } = props;
   const { cohort_title: title, sections } = curriculum;
-  const sectionTitles = sections ? sections.map(section => section.title) : [];
+  const sectionDetails = sections ? sections.map(section => ({title:section.title, units: section.units})) : [];
 
   return (
     <div data-testid="summary-content">
-        <div>
-          <Header as='h1' textAlign='center'>{title}</Header>
-          <List link>
-            {sectionTitles.map(title => <List.Item active key={title}>{title}</List.Item>)}
-          </List>
-        </div>
+      <Header as='h1' textAlign='center'>{title}</Header>
+      <List active="true" bulleted>
+        {sectionDetails.map(section =>(
+          <List.Item key={section.title}>
+            {section.title}
+            <List.List>
+              {section.units.map(unit => <List.Item key={unit.title}>{unit.title}</List.Item>)}
+            </List.List>
+          </List.Item>)
+        )}
+      </List>
     </div>
   );
 };

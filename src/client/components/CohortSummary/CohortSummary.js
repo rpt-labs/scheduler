@@ -25,6 +25,7 @@ export default class CohortSummary extends React.Component {
   }
 
   componentDidMount() {
+    this.getCurriculum();
   }
 
   handleRadioButtonChange(cohort) {
