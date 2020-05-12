@@ -7,7 +7,7 @@ describe('RadioButton', () => {
 
   beforeEach(() => {
     defaultProps = {
-      cohort: {name: 'Test', checked: false},
+      cohort: { name: 'Test', checked: false },
       handleRadioButtonChange: jest.fn()
     };
   });
@@ -19,8 +19,8 @@ describe('RadioButton', () => {
 
   it('should handle button change when the button is clicked', () => {
     const { getByTestId } = render(<RadioButton {...defaultProps} />);
-    const button = getByTestId('radio')
-    fireEvent.click(button.children[0])
+    const button = getByTestId('radio');
+    fireEvent.click(button.children[0]);
     expect(defaultProps.handleRadioButtonChange).toHaveBeenCalled();
   });
 });

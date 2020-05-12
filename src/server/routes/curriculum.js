@@ -1,6 +1,6 @@
-const { Router} = require('express');
+const { Router } = require('express');
 const curriculumRouter = Router();
-curriculumController = require('../controllers/curriculumController');
+const curriculumController = require('../controllers/curriculumController');
 
 
 curriculumRouter.get('/curriculum/:cohortId', curriculumController.getCurriculumByCohortId);
