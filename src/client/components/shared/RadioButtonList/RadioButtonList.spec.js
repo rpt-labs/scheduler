@@ -1,19 +1,16 @@
-
 import React from 'react';
-import { render, fireEvent, getByTestId } from '@testing-library/react';
-import { RadioButtonList } from './RadioButtonList';
+import { render } from '@testing-library/react';
+import RadioButtonList from './RadioButtonList';
 
 describe('RadioButtonList', () => {
   let defaultProps;
 
   beforeEach(() => {
     defaultProps = {
-      cohorts : [
-        {name: 'Test', isChecked: false }
-      ],
+      cohorts: [{ name: 'Test', isChecked: false }],
       handleRadioButtonChange: jest.fn(),
       showDetails: jest.fn(),
-      buttonLabel: "test label"
+      buttonLabel: 'test label'
     };
   });
 

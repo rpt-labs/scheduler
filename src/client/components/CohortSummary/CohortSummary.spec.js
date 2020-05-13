@@ -1,14 +1,12 @@
-
 import React from 'react';
-import { render, fireEvent, getByTestId } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import CohortSummary from './CohortSummary';
 
 describe('cohortSummary', () => {
   let defaultProps;
 
   beforeEach(() => {
-    defaultProps = {
-    };
+    defaultProps = {};
   });
 
   it('should render the cohortSummary component', () => {

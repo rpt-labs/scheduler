@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Radio } from 'semantic-ui-react';
 
-const RadioButton = props => {
+const RadioButton = (props) => {
   const { cohort, handleRadioButtonChange } = props;
   return (
     <div data-testid="radio-button">
       <Form.Field>
-        <Radio data-testid="radio"
+        <Radio
+          data-testid="radio"
           label={cohort.name}
           name="cohortList"
           value={cohort.name}
