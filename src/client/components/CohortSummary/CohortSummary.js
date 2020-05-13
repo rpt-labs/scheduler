@@ -3,7 +3,7 @@ import axios from 'axios';
 import RadioButtonList from '../shared/RadioButtonList/RadioButtonList';
 import SummaryContent from './SummaryContent/SummaryContent';
 
-const cohorts = [
+const cohortsList = [
   { name: 'RPT18', isChecked: false },
   { name: 'RPT19', isChecked: false },
   { name: 'RPT20', isChecked: false },
@@ -14,20 +14,18 @@ export default class CohortSummary extends React.Component {
   constructor() {
     super();
     this.state = {
-      cohorts,
-      curriculum: {}
+      cohorts: cohortsList,
+      curriculum: {},
+      selectedCohort: ''
     };
     this.handleRadioButtonChange = this.handleRadioButtonChange.bind(this);
     this.getCurriculum = this.getCurriculum.bind(this);
   }
 
-  componentDidMount() {
-    this.getCurriculum();
-  }
-
   getCurriculum() {
+    const { selectedCohort } = this.state;
     axios
-      .get(`http://localhost:9001/curriculum/1086`)
+      .get(`http://localhost:9001/curriculum/${selectedCohort}`)
       .then((response) => {
         if (response && response.data) {
           this.setState({ curriculum: response.data });
@@ -39,21 +37,24 @@ export default class CohortSummary extends React.Component {
       });
   }
 
+
   handleRadioButtonChange(cohort) {
     const { cohorts } = this.state;
+    let { selectedCohort } = this.state;
     const newCohortList = cohorts.slice();
     newCohortList.forEach((e) => {
       if (e.name === cohort) {
         e.isChecked = true;
+        selectedCohort = e.name;
       } else {
         e.isChecked = false;
       }
     });
-    this.setState({ cohorts: newCohortList });
+    this.setState({ cohorts: newCohortList, selectedCohort });
   }
 
   render() {
-    const { curriculum } = this.state;
+    const { curriculum, cohorts } = this.state;
     return (
       <div data-testid="cohort-summary">
         <RadioButtonList
