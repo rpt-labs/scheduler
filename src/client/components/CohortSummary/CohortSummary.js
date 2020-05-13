@@ -18,32 +18,32 @@ export default class CohortSummary extends React.Component {
     super();
     this.state = {
       cohorts,
-      curriculum: {}
+      curriculum: {},
+      selectedCohort: ''
     };
     this.handleRadioButtonChange = this.handleRadioButtonChange.bind(this);
     this.getCurriculum = this.getCurriculum.bind(this);
   }
 
-  componentDidMount() {
-    this.getCurriculum();
-  }
-
   handleRadioButtonChange(cohort) {
     const { cohorts } = this.state;
+    let { selectedCohort } = this.state;
     const newCohortList = cohorts.slice();
     newCohortList.forEach(e => {
       if (e.name === cohort) {
         e.isChecked = true;
+        selectedCohort = e.name
       } else {
         e.isChecked = false;
       }
     });
-    this.setState({ cohorts: newCohortList });
+    this.setState({ cohorts: newCohortList, selectedCohort });
   }
 
   getCurriculum() {
+    const { selectedCohort } = this.state;
     axios
-      .get(`http://localhost:9001/curriculum/1086`)
+      .get(`http://localhost:9001/curriculum/${selectedCohort}`)
       .then(response => {
         if (response && response.data) {
           this.setState({ curriculum: response.data });
