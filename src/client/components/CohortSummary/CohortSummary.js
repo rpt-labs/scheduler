@@ -5,7 +5,7 @@ import SummaryContent from './SummaryContent/SummaryContent';
 import { Container } from 'semantic-ui-react';
 
 const cohortsList = [
-  { name: 'RPT18', isChecked: false },
+  { name: 'DEMO', isChecked: false },
   { name: 'RPT19', isChecked: false },
   { name: 'RPT20', isChecked: false },
   { name: 'RPT21', isChecked: false },
