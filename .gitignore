@@ -3,6 +3,7 @@ node_modules
 dist
 fixtures
 cohortMap.js
+sectionsList.js
 
 ##environment variables
 .env

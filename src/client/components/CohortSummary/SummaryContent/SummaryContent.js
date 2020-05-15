@@ -1,26 +1,48 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Header, List} from 'semantic-ui-react';
+import { Header, Icon, Segment } from 'semantic-ui-react';
 
-const SummaryContent = props => {
+const sectionsList = require('../../../../../config/sectionsList');
+
+const SummaryContent = (props) => {
   const { curriculum } = props;
   const { cohort_title: title, sections } = curriculum;
-  const sectionDetails = sections ? sections.map(section => ({title:section.title, units: section.units})) : [];
+  const sectionDetails = sections ? sections.map((section) => ({ title: section.title, units: section.units })) : [];
+  const sortedSections = sectionDetails.sort((a, b) => sectionsList.indexOf(a.title) - sectionsList.indexOf(b.title));
 
   return (
     <div data-testid="summary-content">
-      <Header as='h1' textAlign='center'>{title}</Header>
-      <List active="true" bulleted>
-        {sectionDetails.map(section =>(
-          <List.Item key={section.title}>
-            {section.title}
-            <List.List>
-              {section.units.map(unit => <List.Item key={unit.title}>{unit.title}</List.Item>)}
-            </List.List>
-          </List.Item>)
-        )}
-      </List>
+      <Header as="h1" textAlign="center">
+        {title}
+      </Header>
+      <>
+        {sortedSections.map((section) => (
+          <Segment.Group key={section.title}>
+            <Segment>
+              <Header as="h3">{section.title}</Header>
+            </Segment>
+            <Segment.Group>
+              {section.units.map((unit) =>
+                unit.visible ? (
+                  <Segment key={unit.title} style={{ color: 'green' }}>
+                    <span>
+                      <Icon color="grey" name="hide" style={{ cursor: 'pointer' }} />
+                    </span>
+                    <span style={{ marginLeft: '16px' }}>{unit.title}</span>
+                  </Segment>
+                ) : (
+                  <Segment key={unit.title} style={{ color: 'grey' }}>
+                    <span>
+                      <Icon color="green" name="unhide" style={{ cursor: 'pointer' }} />
+                    </span>
+                    <span style={{ marginLeft: '16px' }}>{unit.title}</span>
+                  </Segment>
+                )
+              )}
+            </Segment.Group>
+          </Segment.Group>
+        ))}
+      </>
     </div>
   );
 };
