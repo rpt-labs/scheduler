@@ -38,7 +38,6 @@ export default class CohortSummary extends React.Component {
       });
   }
 
-
   handleRadioButtonChange(cohort) {
     const { cohorts } = this.state;
     let { selectedCohort } = this.state;
@@ -57,7 +56,7 @@ export default class CohortSummary extends React.Component {
   render() {
     const { curriculum, cohorts } = this.state;
     return (
-      <Container data-testid="cohort-summary">
+      <Container data-testid="cohort-summary" style={{ width: '60%', minWidth: '540px' }}>
         <RadioButtonList
           cohorts={cohorts}
           handleRadioButtonChange={this.handleRadioButtonChange}
