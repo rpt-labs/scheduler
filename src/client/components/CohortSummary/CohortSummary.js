@@ -2,9 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import RadioButtonList from '../shared/RadioButtonList/RadioButtonList';
 import SummaryContent from './SummaryContent/SummaryContent';
+import { Container } from 'semantic-ui-react';
 
 const cohortsList = [
-  { name: 'RPT18', isChecked: false },
+  { name: 'DEMO', isChecked: false },
   { name: 'RPT19', isChecked: false },
   { name: 'RPT20', isChecked: false },
   { name: 'RPT21', isChecked: false },
@@ -37,7 +38,6 @@ export default class CohortSummary extends React.Component {
       });
   }
 
-
   handleRadioButtonChange(cohort) {
     const { cohorts } = this.state;
     let { selectedCohort } = this.state;
@@ -56,7 +56,7 @@ export default class CohortSummary extends React.Component {
   render() {
     const { curriculum, cohorts } = this.state;
     return (
-      <div data-testid="cohort-summary">
+      <Container data-testid="cohort-summary" style={{ width: '60%', minWidth: '540px' }}>
         <RadioButtonList
           cohorts={cohorts}
           handleRadioButtonChange={this.handleRadioButtonChange}
@@ -64,7 +64,7 @@ export default class CohortSummary extends React.Component {
           buttonLabel="Show Summary"
         />
         <SummaryContent curriculum={curriculum} />
-      </div>
+      </Container>
     );
   }
 }
