@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Header, Icon, List, Segment } from 'semantic-ui-react';
+import { Divider, Header, Icon, Segment } from 'semantic-ui-react';
 
 const sectionsList = require('../../../../../config/sectionsList');
 
@@ -29,6 +29,17 @@ const SummaryContent = (props) => {
     </Segment.Group>
   );
 
+  const getUnitContent = (unit, iconName, iconColor, textColor) => (
+    <>
+      <div key={unit.title}>
+        <Icon name={iconName} style={{ cursor: 'pointer', marginRight: '8px', color: `${iconColor}` }} />
+        <span style={{ color: `${textColor}`, fontSize: '20px' }}>{unit.title}</span>
+        {getUnitTitle(unit)}
+      </div>
+      <Divider section />
+    </>
+  );
+
   return (
     <div data-testid="summary-content">
       <Header as="h1" textAlign="center">
@@ -40,29 +51,15 @@ const SummaryContent = (props) => {
             <Segment>
               <Header as="h2">{section.title}</Header>
             </Segment>
-            <Segment.Group>
+            <Segment>
               {section.units.map((unit) =>
-                unit.visible && unit.content_files.every((file) => file.visible === true) ? (
-                  <Segment key={unit.title}>
-                    <Icon name="hide" style={{ cursor: 'pointer', marginRight: '8px', color: 'grey' }} />
-                    <span style={{ color: '#006600', fontSize: '20px' }}>{unit.title}</span>
-                    {getUnitTitle(unit)}
-                  </Segment>
-                ) : unit.visible && unit.content_files.some((file) => file.visible === true) ? (
-                  <Segment key={unit.title}>
-                    <Icon name="hide" style={{ cursor: 'pointer', marginRight: '8px', color: 'grey' }} />
-                    <span style={{ color: '#FDAF08', fontSize: '20px' }}>{unit.title}</span>
-                    {getUnitTitle(unit)}
-                  </Segment>
-                ) : (
-                  <Segment key={unit.title}>
-                    <Icon name="unhide" style={{ cursor: 'pointer', marginRight: '8px', color: '#006600' }} />
-                    <span style={{ color: 'grey', fontSize: '20px' }}>{unit.title}</span>
-                    {getUnitTitle(unit)}
-                  </Segment>
-                )
+                unit.visible && unit.content_files.every((file) => file.visible === true)
+                  ? getUnitContent(unit, 'hide', 'grey', '#006600')
+                  : unit.visible && unit.content_files.some((file) => file.visible === true)
+                  ? getUnitContent(unit, 'hide', 'grey', '#FDAF08')
+                  : getUnitContent(unit, 'unhide', '#006600', 'grey')
               )}
-            </Segment.Group>
+            </Segment>
           </Segment.Group>
         ))}
       </>
