@@ -54,7 +54,7 @@ export default class SummaryContent extends React.Component {
             <Icon name={iconName} style={{ cursor: 'pointer', marginRight: '8px', color: `${color}` }} />
             <span style={{ fontSize: '20px', color: `${color}` }}>{unit.title}</span>
             <span>
-              <Icon name="dropdown" size="huge" style={{ fontSize: '1.2em', float: 'right' }} color="grey" />
+              <Icon name="dropdown" style={{ fontSize: '1.2em', float: 'right' }} color="grey" />
             </span>
           </Accordion.Title>
           <Accordion.Content active={activeIndex === unit.uid}>
