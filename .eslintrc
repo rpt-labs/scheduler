@@ -17,7 +17,7 @@
         "some": [ "nesting", "id"  ]
       }
     }],
-    "prettier/prettier": "error"
+    "prettier/prettier": [ "error" ]
   },
   "extends": ["airbnb", "prettier"]
 }
