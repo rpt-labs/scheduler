@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Grid, Segment, Header } from 'semantic-ui-react';
 import RadioButton from './RadioButton';
-import styles from './RadioButtonList.scss';
+// import styles from './RadioButtonList.scss';
 
 export default function RadioButtonList(props) {
   const { cohorts, handleRadioButtonChange, showDetails, buttonLabel } = props;

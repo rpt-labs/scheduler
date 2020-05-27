@@ -1,4 +1,5 @@
 {
+  "parser": "babel-eslint",
   "plugins": ["react", "import", "jsx-a11y", "prettier"],
   "env": {
     "browser": true,
@@ -8,18 +9,13 @@
   },
   "rules": {
     "react/prop-types": [2],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "comma-dangle": [
-      "error",
-      "never"
-    ],
     "max-len": 0,
     "jsx-a11y/label-has-for": [ "error", {
       "required": {
         "some": [ "nesting", "id"  ]
       }
     }],
-    "prettier/prettier": ["error"]
+    "prettier/prettier": "error"
   },
   "extends": ["airbnb", "prettier"]
 }

@@ -11,16 +11,49 @@ export default class SummaryContent extends React.Component {
     this.state = {
       activeIndex: 0
     };
-    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(e, titleProps) {
+  handleClick = (e, titleProps) => {
     const { index } = titleProps;
     const { activeIndex } = this.state;
     const newIndex = activeIndex === index ? -1 : index;
 
     this.setState({ activeIndex: newIndex });
-  }
+  };
+
+  getUnitTitle = (unit, backgroundColor) => (
+    <Segment.Group style={{ color: 'grey' }}>
+      {unit.content_files.map((file) =>
+        file.visible ? (
+          <Segment key={file.title} style={{ backgroundColor: `${backgroundColor}` }}>
+            <Icon name="checkmark" style={{ cursor: 'pointer', marginRight: '16px', color: '#006600' }} />
+            <span>{file.title}</span>
+          </Segment>
+        ) : (
+          <Segment key={file.title}>
+            <Icon name="x" style={{ cursor: 'pointer', marginRight: '16px', color: '#bf0000' }} />
+            <span style={{ color: 'grey' }}>{file.title}</span>
+          </Segment>
+        )
+      )}
+    </Segment.Group>
+  );
+
+  getUnitContent = (unit, iconName, color, backgroundColor, activeIndex) => (
+    <React.Fragment key={unit.title}>
+      <Accordion>
+        <Accordion.Title active={activeIndex === unit.uid} index={unit.uid} onClick={this.handleClick}>
+          <Icon name={iconName} style={{ cursor: 'pointer', marginRight: '8px', color: `${color}` }} />
+          <span style={{ fontSize: '20px', color: `${color}` }}>{unit.title}</span>
+          <Icon name="dropdown" style={{ fontSize: '1.2em', float: 'right' }} color="grey" />
+        </Accordion.Title>
+        <Accordion.Content active={activeIndex === unit.uid}>
+          <div>{this.getUnitTitle(unit, backgroundColor)}</div>
+        </Accordion.Content>
+        <Divider section />
+      </Accordion>
+    </React.Fragment>
+  );
 
   render() {
     const { curriculum } = this.props;
@@ -28,40 +61,6 @@ export default class SummaryContent extends React.Component {
     const { cohort_title: title, sections } = curriculum;
     const sectionDetails = sections ? sections.map((section) => ({ title: section.title, units: section.units })) : [];
     const sortedSections = sectionDetails.sort((a, b) => sectionsList.indexOf(a.title) - sectionsList.indexOf(b.title));
-
-    const getUnitTitle = (unit, backgroundColor) => (
-      <Segment.Group style={{ color: 'grey' }}>
-        {unit.content_files.map((file) =>
-          file.visible ? (
-            <Segment key={file.title} style={{ backgroundColor: `${backgroundColor}` }}>
-              <Icon name="checkmark" style={{ cursor: 'pointer', marginRight: '16px', color: '#006600' }} />
-              <span>{file.title}</span>
-            </Segment>
-          ) : (
-            <Segment key={file.title}>
-              <Icon name="x" style={{ cursor: 'pointer', marginRight: '16px', color: '#bf0000' }} />
-              <span style={{ color: 'grey' }}>{file.title}</span>
-            </Segment>
-          )
-        )}
-      </Segment.Group>
-    );
-
-    const getUnitContent = (unit, iconName, color, backgroundColor) => (
-      <React.Fragment key={unit.title}>
-        <Accordion>
-          <Accordion.Title active={activeIndex === unit.uid} index={unit.uid} onClick={this.handleClick}>
-            <Icon name={iconName} style={{ cursor: 'pointer', marginRight: '8px', color: `${color}` }} />
-            <span style={{ fontSize: '20px', color: `${color}` }}>{unit.title}</span>
-            <Icon name="dropdown" style={{ fontSize: '1.2em', float: 'right' }} color="grey" />
-          </Accordion.Title>
-          <Accordion.Content active={activeIndex === unit.uid}>
-            <div>{getUnitTitle(unit, backgroundColor)}</div>
-          </Accordion.Content>
-          <Divider section />
-        </Accordion>
-      </React.Fragment>
-    );
 
     return (
       <div data-testid="summary-content">
@@ -77,10 +76,10 @@ export default class SummaryContent extends React.Component {
               <Segment>
                 {section.units.map((unit) =>
                   unit.visible && unit.content_files.every((file) => file.visible === true)
-                    ? getUnitContent(unit, 'checkmark', '#006600', '#F0FFF3')
+                    ? this.getUnitContent(unit, 'checkmark', '#006600', '#F0FFF3', activeIndex)
                     : unit.visible && unit.content_files.some((file) => file.visible === true)
-                    ? getUnitContent(unit, 'checkmark', '#FDAF08', '#F0FFF3')
-                    : getUnitContent(unit, 'x', '#BF0000')
+                    ? this.getUnitContent(unit, 'checkmark', '#FDAF08', '#F0FFF3', activeIndex)
+                    : this.getUnitContent(unit, 'x', '#BF0000', activeIndex)
                 )}
               </Segment>
             </Segment.Group>
