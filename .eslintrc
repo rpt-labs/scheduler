@@ -8,6 +8,8 @@
     "jest": true
   },
   "rules": {
+    "react/jsx-filename-extension": [0],
+    "import/extensions": "off",
     "react/prop-types": [2],
     "max-len": 0,
     "jsx-a11y/label-has-for": [ "error", {
