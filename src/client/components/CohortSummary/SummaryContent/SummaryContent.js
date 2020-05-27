@@ -53,9 +53,7 @@ export default class SummaryContent extends React.Component {
           <Accordion.Title active={activeIndex === unit.uid} index={unit.uid} onClick={this.handleClick}>
             <Icon name={iconName} style={{ cursor: 'pointer', marginRight: '8px', color: `${color}` }} />
             <span style={{ fontSize: '20px', color: `${color}` }}>{unit.title}</span>
-            <span>
-              <Icon name="dropdown" style={{ fontSize: '1.2em', float: 'right' }} color="grey" />
-            </span>
+            <Icon name="dropdown" style={{ fontSize: '1.2em', float: 'right' }} color="grey" />
           </Accordion.Title>
           <Accordion.Content active={activeIndex === unit.uid}>
             <div>{getUnitTitle(unit, backgroundColor)}</div>
