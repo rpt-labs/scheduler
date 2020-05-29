@@ -10,12 +10,6 @@
     "test:watch": "jest ./src --watch",
     "lint": "eslint *.js --fix"
   },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rpt-labs/scheduler.git"
@@ -36,8 +30,10 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "babel-eslint": "^10.1.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "eslint-loader": "^4.0.2",
     "express": "^4.17.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
@@ -46,8 +42,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-react": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
     "@testing-library/react": "^10.0.1",
     "@types/jest": "^25.1.4",
     "babel-loader": "^8.0.6",
