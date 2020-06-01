@@ -1,7 +1,11 @@
 const path = require('path');
+const dotenv = require('dotenv');
+const webpack = require('webpack');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const srcFolder = path.join(__dirname, '/src/client/');
+const env = dotenv.config().parsed;
 
 module.exports = {
   entry: {
@@ -51,6 +55,11 @@ module.exports = {
   },
   mode: 'development',
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.OKTA_URL': JSON.stringify(env.OKTA_URL),
+      'process.env.OKTA_CLIENT_ID': JSON.stringify(env.OKTA_CLIENT_ID),
+      'process.env.OKTA_BASE_URL': JSON.stringify(env.OKTA_BASE_URL)
+    }),
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     })
