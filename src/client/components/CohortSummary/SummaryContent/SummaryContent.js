@@ -50,7 +50,7 @@ export default class SummaryContent extends React.Component {
         <Accordion.Content active={activeIndex === unit.uid}>
           <div>{this.getUnitTitle(unit, backgroundColor)}</div>
         </Accordion.Content>
-        <Divider section />
+        <Divider />
       </Accordion>
     </React.Fragment>
   );
@@ -79,7 +79,7 @@ export default class SummaryContent extends React.Component {
                     ? this.getUnitContent(unit, 'checkmark', '#006600', '#F0FFF3', activeIndex)
                     : unit.visible && unit.content_files.some((file) => file.visible === true)
                     ? this.getUnitContent(unit, 'checkmark', '#FDAF08', '#F0FFF3', activeIndex)
-                    : this.getUnitContent(unit, 'x', '#BF0000', activeIndex)
+                    : this.getUnitContent(unit, 'x', '#BF0000', '#FFF', activeIndex)
                 )}
               </Segment>
             </Segment.Group>
