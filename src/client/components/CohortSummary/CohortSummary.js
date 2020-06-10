@@ -4,22 +4,39 @@ import { Container } from 'semantic-ui-react';
 import RadioButtonList from '../shared/RadioButtonList/RadioButtonList';
 import SummaryContent from './SummaryContent/SummaryContent';
 
-const cohortsList = [
-  { name: 'DEMO', isChecked: false },
-  { name: 'RPT19', isChecked: false },
-  { name: 'RPT20', isChecked: false },
-  { name: 'RPT21', isChecked: false },
-  { name: 'RPT22', isChecked: false }
-];
 export default class CohortSummary extends React.Component {
   constructor() {
     super();
     this.state = {
-      cohorts: cohortsList,
+      cohorts: [],
       curriculum: {},
       selectedCohort: ''
     };
   }
+
+  componentDidMount() {
+    this.getCohorts();
+  }
+
+  getCohorts = () => {
+    axios
+      .get(`http://localhost:9001/api/cohorts`)
+      .then((response) => {
+        if (response && response.data) {
+          const cohorts = response.data.data
+            .map((cohort) => ({
+              name: cohort.cohort_short_name,
+              cohortId: cohort.cohort_id,
+              isChecked: false
+            }))
+            .sort((a, b) => a.cohortId - b.cohortId);
+          this.setState({ cohorts });
+        }
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
 
   getCurriculum = () => {
     const { selectedCohort } = this.state;
