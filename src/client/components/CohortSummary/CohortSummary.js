@@ -25,11 +25,11 @@ export default class CohortSummary extends React.Component {
         if (response && response.data) {
           const cohorts = response.data.data
             .map((cohort) => ({
-              name: cohort.cohort_short_name,
+              name: cohort.cohort_id,
               cohortId: cohort.cohort_id,
               isChecked: false
             }))
-            .sort((a, b) => a.cohortId - b.cohortId);
+            .sort((a, b) => a.cohort_id - b.cohort_id);
           this.setState({ cohorts });
         }
       })
