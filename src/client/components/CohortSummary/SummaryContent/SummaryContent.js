@@ -56,7 +56,7 @@ export default class SummaryContent extends React.Component {
         </Accordion>
       </Grid.Column>
       <Grid.Column width={3}>
-        <ReleaseContent />
+        <ReleaseContent url={unit.api_endpoint} />
       </Grid.Column>
     </Grid.Row>
   );
