@@ -32,6 +32,12 @@ app.get('/curriculum/:cohortName', async (req, res) => {
   res.status(200).send(data);
 });
 
+app.patch('/release/:url', async (req, res) => {
+  const { url } = req.params;
+  const data = await api.releaseUnitForCohort(url);
+  res.status(200).send(data);
+});
+
 app.use('/scheduler/curriculum', curriculum);
 
 app.listen(port, () => {

@@ -1,4 +1,4 @@
 const cohortMap = {
   RPTX: Number,
-  RPTY: Number,
+  RPTY: Number
 }
